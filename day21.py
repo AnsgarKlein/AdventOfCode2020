@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from typing import Dict
 from typing import List
 from typing import Tuple
 from typing import Union
@@ -106,12 +107,11 @@ def main():
     #    print('Allergen: {}'.format(allergen))
     #print()
 
-
-    ############ PART ONE ############
+    ingredient_allergen: Dict[str, str] = dict()
 
     # Go through all allergens
     changed_something = True
-    while changed_something == True:
+    while changed_something:
         changed_something = False
 
         for allergen in all_allergens:
@@ -157,6 +157,7 @@ def main():
                 changed_something = True
 
                 print('"{}" is responsible for "{}"'.format(responsible_ingredient.name, allergen))
+                ingredient_allergen[responsible_ingredient.name] = allergen
 
                 # Ingredient definitely contains allergen and nothing else.
                 responsible_ingredient.possible_allergens = [ allergen ]
@@ -198,6 +199,8 @@ def main():
     print('Healty ingredient: {}'.format(healthy_ingredient_names))
     print()
 
+    ############ PART ONE ############
+
     # Count number of occurrences of healthy ingredients
     healthy_occurrences = 0
     for ingr in healthy_ingredients:
@@ -205,6 +208,15 @@ def main():
             if ingr in food.ingredients:
                 healthy_occurrences += 1
     print('Healthy ingredients occur {} times'.format(healthy_occurrences))
+
+
+    ############ PART TWO ############
+    # Sort ingredient->allergen dict by allergens
+    output = [tup[0] for tup in sorted(ingredient_allergen.items(), key = lambda tup: tup[1])]
+
+    # Print sorted list of ingredients
+    print('Dangerous Ingredients: {}'.format(','.join(output)))
+
 
 if __name__ == '__main__':
     main()
