@@ -1,5 +1,25 @@
+# Generic editor
+*~
+*.bak
+
+# vim
+*.swp
+Session.vim
+Sessionx.vim
+.netrwhist
+
 # virtualenv
 env/
 venv/
 .env/
 .venv/
+
+# mypy
+.mypy_cache/
+
+# pytype
+.pytype/
+
+# python
+__pycache__/
+*.pyc
